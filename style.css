@@ -29,6 +29,7 @@ body {
 .starting-container h1 {
   font-size: 90px;
   color: #e01401;
+  text-align: center;
 }
 
 .question {

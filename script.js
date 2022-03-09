@@ -66,16 +66,15 @@ cardsImg.forEach((cardImg, index) => {
       completedTracker++;
     }
 
-    if (
-      results.length === 2 &&
-      results[0] !== results[1] &&
-      event.target.classList.contains("open")
-    ) {
+    if (results.length === 2 && results[0] !== results[1]) {
       setTimeout(() => {
-        openedCards[0].classList.remove("open");
-        openedCards[0].classList.add("close");
-        openedCards[1].classList.remove("open");
-        openedCards[1].classList.add("close");
+        if (openedCards.length !== 0) {
+          openedCards[0].classList.remove("open");
+          openedCards[0].classList.add("close");
+          openedCards[1].classList.remove("open");
+          openedCards[1].classList.add("close");
+        }
+
         results = [];
         openedCards = [];
       }, 800);
