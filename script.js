@@ -51,7 +51,7 @@ function shuffleArray(array) {
 }
 
 cardsImg.forEach((cardImg, index) => {
-  cardImg.addEventListener("click", () => {
+  cardImg.addEventListener("click", (event) => {
     if (results.length < 2) {
       cardImg.classList.remove("close");
       cardImg.classList.add("open");
@@ -66,7 +66,11 @@ cardsImg.forEach((cardImg, index) => {
       completedTracker++;
     }
 
-    if (results.length === 2 && results[0] !== results[1]) {
+    if (
+      results.length === 2 &&
+      results[0] !== results[1] &&
+      event.target.classList.contains("open")
+    ) {
       setTimeout(() => {
         openedCards[0].classList.remove("open");
         openedCards[0].classList.add("close");
@@ -87,6 +91,8 @@ cardsImg.forEach((cardImg, index) => {
         modal.classList.remove("hidden");
       }, 1000);
     }
+    console.log(results);
+    console.log(openedCards);
   });
 });
 
