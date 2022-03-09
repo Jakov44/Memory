@@ -70,6 +70,13 @@ body {
   border-radius: 20px;
 }
 
+@media only screen and (max-width: 1000px) {
+  .card {
+    width: 20%;
+    height: 17%;
+  }
+}
+
 .card-img {
   border-radius: 20px;
   width: 100%;
