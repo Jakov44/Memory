@@ -52,46 +52,42 @@ function shuffleArray(array) {
 
 cardsImg.forEach((cardImg, index) => {
   cardImg.addEventListener("click", (event) => {
-    if (results.length < 2) {
-      cardImg.classList.remove("close");
-      cardImg.classList.add("open");
+    if (results.length < 2 && openedCards.length < 2) {
       results.push(images[index].tag);
       openedCards.push(cardImg);
+      cardImg.classList.remove("close");
+      cardImg.classList.add("open");
       clicks++;
-    }
-    if (results.length === 2 && results[0] === results[1]) {
-      cardImg.disabled = "true";
-      results = [];
-      openedCards = [];
-      completedTracker++;
-    }
 
-    if (results.length === 2 && results[0] !== results[1]) {
-      setTimeout(() => {
-        if (openedCards.length !== 0) {
+      if (results.length === 2 && results[0] === results[1]) {
+        results = [];
+        openedCards = [];
+        completedTracker++;
+      }
+
+      if (results.length === 2 && results[0] !== results[1]) {
+        setTimeout(() => {
           openedCards[0].classList.remove("open");
           openedCards[0].classList.add("close");
           openedCards[1].classList.remove("open");
           openedCards[1].classList.add("close");
-        }
 
-        results = [];
-        openedCards = [];
-      }, 800);
+          results = [];
+          openedCards = [];
+        }, 800);
+      }
+      if (completedTracker === 8) {
+        setTimeout(() => {
+          if (localStorage.najbolji > clicks) {
+            localStorage.najbolji = clicks;
+          }
+          attempts.innerText = `Uspjeli ste iz ${clicks} pokušaja.`;
+          bestResult.innerText = `Najbolji prijašnji rezultat: ${localStorage.najbolji}`;
+          container.classList.add("hidden");
+          modal.classList.remove("hidden");
+        }, 1000);
+      }
     }
-    if (completedTracker === 8) {
-      setTimeout(() => {
-        if (localStorage.najbolji > clicks) {
-          localStorage.najbolji = clicks;
-        }
-        attempts.innerText = `Uspjeli ste iz ${clicks} pokušaja.`;
-        bestResult.innerText = `Najbolji prijašnji rezultat: ${localStorage.najbolji}`;
-        container.classList.add("hidden");
-        modal.classList.remove("hidden");
-      }, 1000);
-    }
-    console.log(results);
-    console.log(openedCards);
   });
 });
 
